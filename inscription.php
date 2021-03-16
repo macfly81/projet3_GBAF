@@ -1,5 +1,17 @@
 <?php
-$bdd = new PDO('mysql:localhost;dbname=account','root','root')
+$bdd = new PDO('mysql:localhost;dbname=account','root','root');
+
+if(isset($_POST['vinscription']))
+{
+	$nom = htmlspecialchars($_POST['nom']);
+	$prenom = htmlspecialschars($_POST['prenom']);
+	$username = htmlspecialchars($_POST['username']);
+	$pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+	$reponse = htmlspecialchars($_POST['reponse']);
+}
+
+	if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['pass']) AND !empty($_POST['question']) AND !empty($_POST['reponse']))
+
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +24,6 @@ $bdd = new PDO('mysql:localhost;dbname=account','root','root')
 		<body>
 			<div align="center">
 				<h2> Veuillez remplir les champs suivants pour l'inscription :</h2>
-				<br /><br />
 				<form method="POST" action="">
 					<table>
 						<tr>
@@ -69,7 +80,7 @@ $bdd = new PDO('mysql:localhost;dbname=account','root','root')
 							<tr>
 								<td></td>
 								<td>
-									<input type="submit" value="valider l'inscription" />
+									<input type="submit" name="vinscription" value="valider l'inscription" />
 								</td>
 						</tr><br />
 					</table>
