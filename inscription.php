@@ -1,17 +1,23 @@
 <?php
-$bdd = new PDO('mysql:localhost;dbname=account','root','root');
+
+$bdd = new PDO('mysql:localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 if(isset($_POST['vinscription']))
 {
 	$nom = htmlspecialchars($_POST['nom']);
-	$prenom = htmlspecialschars($_POST['prenom']);
+	$prenom = htmlspecialchars($_POST['prenom']);
 	$username = htmlspecialchars($_POST['username']);
-	$pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+	$question = $_POST['question'];
 	$reponse = htmlspecialchars($_POST['reponse']);
+
+
+
+	if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['reponse'])) 
+	
 }
-
-	if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['pass']) AND !empty($_POST['question']) AND !empty($_POST['reponse']))
-
+	
+		
 ?>
 
 <!DOCTYPE html>
@@ -52,15 +58,15 @@ if(isset($_POST['vinscription']))
 						</tr><br />
 							<tr>
 							<td>
-								<label for ="pass">Votre mot de passe :</label>
+								<label for ="password">Votre mot de passe :</label>
 							</td>
 							<td>
-								<input type="password" placeholder="mot de passe" id="pass" name="pass" />
+								<input type="password" placeholder="mot de passe" id="password" name="password" />
 							</td>
 						</tr><br />
 							<tr>
 								<td>
-								<label for="question">Question secrète :</label><br />
+								<label for="question">Quel est ton livre préféré ?</label><br />
 								</td>
 								<td>
 									<select name="question" id="question">
@@ -77,6 +83,7 @@ if(isset($_POST['vinscription']))
 								<td>
 									<input type="texte" placeholder="reponse" id="reponse" name="reponse" />
 								</td>
+							</tr>
 							<tr>
 								<td></td>
 								<td>
@@ -84,6 +91,13 @@ if(isset($_POST['vinscription']))
 								</td>
 						</tr><br />
 					</table>
+				</form>
+				<?php
+					if(isset($erreur))
+					{
+						echo '<font color="red">'.$erreur."</font>";
+					}
+				?>
 			</div>
 		</body>
 			<footer>
