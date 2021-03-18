@@ -5,18 +5,18 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 if(isset($_POST['vconnexion']))
 {
 
-	$userconnect = htmlspecialchars($_POST['userconnect']);
-	$passwordconnect = password_hash($_POST['passwordconnect'], PASSWORD_DEFAULT);
-	if(!empty($userconnect) AND !empty($passwordconnect))
+	$username = htmlspecialchars($_POST['username']);
+	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+	if(!empty($username) AND !empty($password))
 	{
-		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['userconnect']))
+		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
 				$erreur= "tout est bon";
 
 		}
 		else
 			{
-				$erreur = "Votre Pseudonyme contient des caractères non autorisées !";
+				$erreur = "Votre Pseudonyme contient des caractères non autorisées";
 			}
 
 	}
@@ -45,7 +45,7 @@ if(isset($_POST['vconnexion']))
 								<label for ="Nom">Votre Pseudo :</label>
 							</td>
 							<td>
-								<input type="texte" placeholder="username" id="userconnect" name="userconnect" />
+								<input type="texte" placeholder="username" id="username" name="username" />
 							</td>
 						</tr><br />
 							<tr>
@@ -53,7 +53,7 @@ if(isset($_POST['vconnexion']))
 									<label for ="Prenom">Votre Mot De Passe :</label>
 								</td>
 								<td>
-									<input type="password" placeholder="password" id="passwordconnect" name="passwordconnect" />
+									<input type="password" placeholder="password" id="password" name="password" />
 								</td>
 							</tr><br />
 						
