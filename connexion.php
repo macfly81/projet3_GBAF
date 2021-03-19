@@ -1,6 +1,6 @@
 <?php
 
-$bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connection à la bdd*/
+$bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connexion à la bdd*/
 
 if(isset($_POST['vconnexion']))
 {
@@ -11,8 +11,28 @@ if(isset($_POST['vconnexion']))
 	{
 		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
-				$erreur= "tout est bon";
-
+			$reqprofil = $bdd->prepare('SELECT id_user, password FROM account WHERE username = :username');
+			$reqprofil->execute(array(
+				'username' => $username));
+			$profilexist = $reqprofil->fetch();
+			{
+				if(!$profilexist)
+				{
+					$erreur = "Mauvais identifiant ou mot de passe !";
+				}   
+				else
+					{
+					$PasswordCorrect = password_verify($_POST['password'], $profilexist['password']);
+					if($PasswordCorrect)
+						{
+							$erreur = "La connexion est possible !";
+						}
+					else 
+						{
+							$erreur = "Mauvais identifiant ou mot de passe 2 !";
+						}
+					}	
+			}			
 		}
 		else
 			{
