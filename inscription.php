@@ -1,6 +1,6 @@
 <?php
 
-$bdd = new PDO('mysql:localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+$bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connection à la bdd*/
 
 if(isset($_POST['vinscription']))
 {
@@ -8,15 +8,47 @@ if(isset($_POST['vinscription']))
 	$prenom = htmlspecialchars($_POST['prenom']);
 	$username = htmlspecialchars($_POST['username']);
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-	$question = $_POST['question'];
+	$question = htmlspecialchars($_POST['question']);
 	$reponse = htmlspecialchars($_POST['reponse']);
+if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['reponse'])) /*insertion du REGEX pour le nom, prenom, username*/
+    {	
+	if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['nom']) AND preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['prenom']))
+	{
+	if(preg_match('/^[a-zA-Z0-9-_]{2,36}$/', $_POST['username']))
+	   {
+		$requsername = $bdd->prepare("SELECT * FROM account WHERE username = ?");
+		$requsername->execute(array($username));
+		$userexist = $requsername->rowCount(); /*requete pour éviter les doublons de pseudonymes*/
+		if($userexist == 0)
+		{
+				$pass_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+				$insertmembres = $bdd->prepare("INSERT INTO account(nom, prenom, username, password, question, reponse) VALUES(:nom, :prenom, :username, :password, :question, :reponse)");
+				$insertmembres->execute(array(
+					'nom' => $nom,
+					'prenom' => $prenom,
+					'username' => $username,
+					'password' => $pass_hash,
+					'question' => $question,
+					'reponse' => $reponse));
+				$erreur = "votre compte a bien été crée";
+		} else
+			{
+			$erreur = "ce pseudonyme existe déjà";
+			}
+		} else
+			{
+			$erreur = "votre pseudonyme doit contenir entre 2 et 36 caractères et être au format alphanumérique !";
+			}
+		} else 
+			{
+			$erreur = "Le champ : nom ou prénom, contient un caractère non valide !";
+			}
+		} else
+			{
+				$erreur = "Tous les champs doivent être remplis !";
+			}
 
-
-
-	if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['reponse'])) 
-	
-}
-	
+}	
 		
 ?>
 
@@ -33,7 +65,7 @@ if(isset($_POST['vinscription']))
 				<form method="POST" action="">
 					<table>
 						<tr>
-							<td>
+							<td align="right">
 								<label for ="Nom">Votre nom :</label>
 							</td>
 							<td>
@@ -41,7 +73,7 @@ if(isset($_POST['vinscription']))
 							</td>
 						</tr><br />
 							<tr>
-								<td>
+								<td align="right">
 									<label for ="Prenom">Votre prenom :</label>
 								</td>
 								<td>
@@ -49,7 +81,7 @@ if(isset($_POST['vinscription']))
 								</td>
 							</tr><br />
 						<tr>
-							<td>
+							<td align="right">
 								<label for ="username">Votre pseudo :</label>
 							</td>
 							<td>
@@ -57,7 +89,7 @@ if(isset($_POST['vinscription']))
 							</td>
 						</tr><br />
 							<tr>
-							<td>
+							<td align="right">
 								<label for ="password">Votre mot de passe :</label>
 							</td>
 							<td>
@@ -65,8 +97,8 @@ if(isset($_POST['vinscription']))
 							</td>
 						</tr><br />
 							<tr>
-								<td>
-								<label for="question">Quel est ton livre préféré ?</label><br />
+								<td align="right">
+								<label for="question">Question secrète :</label><br />
 								</td>
 								<td>
 									<select name="question" id="question">
@@ -77,7 +109,7 @@ if(isset($_POST['vinscription']))
 								</td>
 						</tr><br />
 							<tr>
-								<td>
+								<td align="right">
 									<label for ="reponse">réponse à la question secrète :</label>
 								</td>
 								<td>
@@ -91,7 +123,7 @@ if(isset($_POST['vinscription']))
 								</td>
 						</tr><br />
 					</table>
-				</form>
+				</form> </br>
 				<?php
 					if(isset($erreur))
 					{
