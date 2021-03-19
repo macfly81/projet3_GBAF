@@ -30,7 +30,7 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 					'password' => $pass_hash,
 					'question' => $question,
 					'reponse' => $reponse));
-				$erreur = "votre compte a bien été crée";
+				$erreur = "votre compte a bien été crée ! <a href=\"connexion.php\">Me connecter</a>";
 		} else
 			{
 			$erreur = "ce pseudonyme existe déjà";
