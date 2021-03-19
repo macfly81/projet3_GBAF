@@ -12,7 +12,7 @@ if(isset($_POST['vconnexion']))
 	{
 		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
-			$reqprofil = $bdd->prepare('SELECT id_user, password FROM account WHERE username = :username');
+			$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password FROM account WHERE username = :username');
 			$reqprofil->execute(array(
 				'username' => $username));
 			$profilexist = $reqprofil->fetch();
@@ -29,6 +29,7 @@ if(isset($_POST['vconnexion']))
 							$_SESSION['id_user'] = $profilexist['id_user'];
 							$_SESSION['username'] = $username;
 							header("Location: index.php?id_user=".$_SESSION['id_user']);
+							$erreur = "tout est bon !";
 
 						}
 					else 
