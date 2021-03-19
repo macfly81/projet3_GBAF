@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connexion à la bdd*/
 
@@ -25,7 +26,10 @@ if(isset($_POST['vconnexion']))
 					$PasswordCorrect = password_verify($_POST['password'], $profilexist['password']);
 					if($PasswordCorrect)
 						{
-							$erreur = "La connexion est possible !";
+							$_SESSION['id_user'] = $profilexist['id_user'];
+							$_SESSION['username'] = $username;
+							header("Location: index.php?id_user=".$_SESSION['id_user']);
+
 						}
 					else 
 						{
