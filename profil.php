@@ -44,7 +44,7 @@ if(isset($_GET['id_user']) AND $_GET['id_user'] > 0)
 			<div align="center">
 				<h2> Liste des Acteurs et Partenaires </h2>
 			<section class="conteneur acteurs">
-				<table border= 1 align="center">
+				<table class="tableau_acteur" border= 1 align="center">
 					<tr>
 						<th>Logo</th>
 						<th>Description</th>
@@ -67,14 +67,11 @@ if(isset($_GET['id_user']) AND $_GET['id_user'] > 0)
 						<td><p>Formation&ampco est une association française présente sur tout le territoire. Nous proposons à des personnes issues de tout milieu de devenir entrepreneur grâce à un crédit et un accompagnement...<a href=#>Lire la suite</a></p></td>
 					</tr>
 				</table>
-				
-
 			</section>
-					
 			</div>
 		</body>
-			<footer>
-
+			<footer align="center">
+				<p>Mentions légales</p>
 			</footer>
 </html>
 <?php
