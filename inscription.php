@@ -121,8 +121,8 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 								<td>
 									<input type="submit" name="vinscription" value="valider l'inscription" />
 								</td>
-						</tr><br />
-					</table>
+						</tr><br /><br /> 
+					</table> <br/><a href="connexion.php">Retourner à la page de connexion</a> 
 				</form> </br>
 				<?php
 					if(isset($erreur))

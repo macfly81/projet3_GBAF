@@ -1,14 +1,24 @@
 <?php
 session_start();
-header("content-type : image/png");
 
 $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connexion à la bdd*/
-if(isset($_GET['id_user']) AND $_GET['id_user'] > 0)
-{
-	$getid_user = intval($_GET['id_user']); /*dois-je rajouter le htmlspecialchars ici ?*/
-	$reqprofil = $bdd->prepare('SELECT * FROM account WHERE id_user = ?');
-	$reqprofil->execute(array($getid_user));
-	$userinfo = $reqprofil->fetch();
+ 
+	$reqacteurs = $bdd->prepare('SELECT *  FROM acteurs');
+	$reqacteurs->execute();
+	$acteurs = $reqacteurs->fetchAll();
+
+	if(isset($_GET['id_acteur']) AND isset($_SESSION['id_user']))
+		{						
+		foreach ($acteurs as $acteur) 
+			{
+				$_GET['id_acteur'] = $acteur['id_acteur'];	
+				$_SESSION['acteur'] = $acteur['acteur'];
+				$_SESSION['description'] = $acteur['description'];
+				$_SESSION['logo'] = $acteur['logo'];
+				header("acteur.php?id_acteur=");
+			}
+		}
+	
 		
 ?>
 
@@ -21,12 +31,12 @@ if(isset($_GET['id_user']) AND $_GET['id_user'] > 0)
 		<title>Groupement Banque Assurance Français</title>
 		<div >
 		<figure>
-				<img src="images/logo_gbaf.png" alt="logo de gbaf" />
+				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
 				<img src="images/contact.png" alt="image de contact" align="right" />
 		<div align ="right">
-				<p> Bienvenue<strong> <?php echo $userinfo['nom'] .' '. $userinfo['prenom']; ?></strong></p>
+				<p> Bienvenue<strong> <?php echo $_SESSION['prenom'] ?></strong></p>
 				<?php 
-					if(isset($_SESSION['id_user']) AND $userinfo['id_user'] == $_SESSION['id_user'])
+					if(isset($_SESSION['id_user']))
 					{
 						?>
 						<a href="editonprofil.php">Changez votre mot de passe</a> <br />
@@ -44,36 +54,33 @@ if(isset($_GET['id_user']) AND $_GET['id_user'] > 0)
 			<div align="center">
 				<h2> Liste des Acteurs et Partenaires </h2>
 			<section class="conteneur acteurs">
-				<table class="tableau_acteur" border= 1 align="center">
-					<tr>
-						<th>Logo</th>
-						<th>Description</th>
-					</tr>
-					<tr>
-						<td><img style="max-width: 150px;" src="images/cde.png"></td>
-						<td><p>La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
-	Son président est élu pour 3 ans par ses pairs,...<a href=#>Lire la suite</a></p></td>
-					</tr>
-					<tr>
-						<td><img style="max-width: 150px;" src="images/Dsa_france.png"></td>
-						<td><p>Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales. Nous accompagnons les entreprises dans les étapes clés...<a href=#>Lire la suite</a></p></td>
-					</tr>
-					<tr>
-						<td><img style="max-width: 150px;" src="images/protectpeople.png"></td>
-						<td><p>Chez Protectpeople, chacun cotise selon ses moyens et reçoit selon ses besoins. Proectecpeople est ouvert à tous, sans considération d’âge ou d’état de santé. Nous garantissons un accès aux soins et...<a href=#>Lire la suite</a></p></td>
-					</tr>
-					<tr>
-						<td><img style="max-width: 150px;" src="images/formationco.png"></td>
-						<td><p>Formation&ampco est une association française présente sur tout le territoire. Nous proposons à des personnes issues de tout milieu de devenir entrepreneur grâce à un crédit et un accompagnement...<a href=#>Lire la suite</a></p></td>
-					</tr>
+					<table border= 1 class="tableau_acteur">
+						<tr>
+							<th>Numero Acteur</th>
+							<th>Acteur</th>
+							<th>Description</th>
+							<th>Logo</th>
+							<th>Acces page acteur</th>
+						</tr>
+					<?php 	
+					  	
+						foreach($acteurs as $acteur):
+					?>
+
+						<tr>
+							<td align = "center"><?= $acteur['id_acteur']; ?></td>
+							<td><?= $acteur['acteur']; ?></td>
+							<td style="width:400px";><?= $acteur['description']; ?></td>
+							<td> <img style="max-width:200px"; src ="<?= $acteur['logo']; ?>" /> </td>
+							<td> <a href=acteur.php?id_acteur=<?= $acteur['id_acteur']; ?>>lire la suite</a></td>
+						</tr>
+						 <?php endforeach ?>
 				</table>
 			</section>
 			</div>
 		</body>
 			<footer align="center">
-				<p>Mentions légales</p>
+				
 			</footer>
 </html>
-<?php
-}
-?>
+
