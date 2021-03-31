@@ -9,14 +9,11 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 
 	if(isset($_GET['id_acteur']) AND isset($_SESSION['id_user']))
 		{						
-		foreach ($acteurs as $acteur) 
-			{
-				$_GET['id_acteur'] = $acteur['id_acteur'];	
-				$_SESSION['acteur'] = $acteur['acteur'];
-				$_SESSION['description'] = $acteur['description'];
-				$_SESSION['logo'] = $acteur['logo'];
-				header("acteur.php?id_acteur=");
-			}
+				$_SESSION['id_acteur'] = $acteurs['id_acteur'];	
+				$_SESSION['acteur'] = $acteurs['acteur'];
+				$_SESSION['description'] = $acteurs['description'];
+				$_SESSION['logo'] = $acteurs['logo'];
+				header("acteur.php?");
 		}
 	
 		

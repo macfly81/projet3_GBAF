@@ -1,4 +1,14 @@
 h2
 {
-	color:blue;
+	color:red;
+}
+.tableau_acteur
+{
+	width: 50%;
+	margin : 200, 10, 10, 10;
+	padding : 100, 10, 10, 10;
+}
+footer
+{
+	
 }

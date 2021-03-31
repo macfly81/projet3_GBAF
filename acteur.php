@@ -9,8 +9,12 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		{	 					
 			$get_acteur = htmlspecialchars(($_GET['id_acteur']));
 			$reqacteur = $bdd->prepare('SELECT * FROM acteurs WHERE id_acteur = ?');
-			$reqacteur->execute(array());
-			
+			$reqacteur->execute(array(
+				'id_acteur'=> $_GET['id_acteur'],
+				'acteur' => $_SESSION['acteur'],
+				'description' => $_SESSION['description'],
+				'logo' => $_SESSION['logo']));
+			$acteur= $reqacteur->fetch();	
 		}	
 				
 			
@@ -22,7 +26,26 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		<link rel="stylesheet" href="style.css" type="text/css" />
 		<meta charset="utf-8"/>
 		<link rel="icon" href="images/favicon_gbaf.ico" />
-		<title></title>
+		<title>Paramètre de votre compte </title>
+		<div >
+		<figure>
+				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
+				<img src="images/contact.png" alt="image de contact" align="right" />
+		<div align ="right">
+				<p> Bienvenue<strong> <?php echo $_SESSION['prenom'] ?></strong></p>
+				<?php 
+					if(isset($_SESSION['id_user']))
+					{
+						?>
+						<a href="editonprofil.php">Changez votre mot de passe</a> <br />
+						<a href="deconnexion.php">Vous déconnecter</a>
+						<?php
+					}
+				?>
+		</figure>
+
+			
+		</div>
 	</head>
 			<body>
 				<div align="center">
@@ -36,13 +59,15 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 							<th>Logo</th>
 						</tr>
 						<tr>
-							<td align = "center"><?= $acteur['id_acteur']; ?></td>
-							<td><?= $acteur['acteur']; ?></td>
-							<td style="width:400px";><?= $acteur['description']; ?></td>
-							<td> <img style="max-width:200px"; src ="<?= $acteur['logo']; ?>" /> </td>
+							<td align = "center"><?= $_GET['id_acteur']; ?></td>
+							<td><?= $_SESSION['acteur']; ?></td>
+							<td style="width:400px";><?= $_SESSION['description']; ?></td>
+							<td> <img style="max-width:200px"; src ="<?= $_SESSION['logo']; ?>" /> </td>
 						</tr>
 				</table>
 			</section>
 			</div>
+			<div><br />
+				<h2> </h2>
 			</body>
 </html>

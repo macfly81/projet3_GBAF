@@ -12,7 +12,7 @@ if(isset($_POST['vconnexion']))
 	{
 		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
-			$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password FROM account WHERE username = :username');
+			$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password, question, reponse FROM account WHERE username = :username');
 			$reqprofil->execute(array(
 				'username' => $username));
 			$profilexist = $reqprofil->fetch();
@@ -28,13 +28,17 @@ if(isset($_POST['vconnexion']))
 						{
 							$_SESSION['id_user'] = $profilexist['id_user'];
 							$_SESSION['username'] = $username;
-							header("Location: index.php?id_user=".$_SESSION['id_user']);
+							$_SESSION['nom'] = $profilexist['nom'];
+							$_SESSION['prenom'] = $profilexist['prenom'];
+							$_SESSION['question'] = $profilexist['question'];
+							$_SESSION['reponse'] = $profilexist['reponse'];
+							header("Location: profil.php");
 							$erreur = "tout est bon !";
 
 						}
 					else 
 						{
-							$erreur = "Mauvais identifiant ou mot de passe 2 !";
+							$erreur = "Mauvais identifiant ou mot de passe !";
 						}
 					}	
 			}			
@@ -56,9 +60,14 @@ if(isset($_POST['vconnexion']))
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="style.css" type="text/css" />
-		<meta charset="utf-8"/>
-		<title>page d'inscription</title> 
+		<header>
+			<link rel="stylesheet" href="style.css" type="text/css" />
+			<meta charset="utf-8"/>
+			<title>page de connexion</title> 
+			<figure>
+					<img style="max-width:80px";  src="images/logo_gbaf.png" alt="logo de gbaf" />
+				</figure>
+		</header>
 	</head>
 		<body>
 			<div align="center">
@@ -91,7 +100,7 @@ if(isset($_POST['vconnexion']))
 						</tr><br />
 							<tr>
 								<td></td>
-								<td><br /><a href="Mot de Passe oublié ?">Mot de passe oublié ?</a>
+								<td><br /><a href="mdpforget.php">Mot de passe oublié ?</a>
 								</td>
 
 							</tr>

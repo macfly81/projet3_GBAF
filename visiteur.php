@@ -7,7 +7,7 @@
 	</head>
 		<body>
 			<figure>
-				<img src="images/logo_gbaf.png" alt="logo de gbaf" />
+				<img align="center" style="max-width:80px";  src="images/logo_gbaf.png" alt="logo de gbaf" />
 			</figure>
 				<div align="center">
 					<h2>Bienvenue sur le site de la GBAF</h2>
