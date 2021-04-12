@@ -1,14 +1,20 @@
+*
+{
+	background-color: 	#d6cdcb ;
+}
+
 h2
 {
-	color:red;
+	color:blue;
 }
 .tableau_acteur
 {
-	width: 50%;
+	width: 70%;
 	margin : 200, 10, 10, 10;
 	padding : 100, 10, 10, 10;
 }
-footer
+h1
 {
-	
+	font-style: italic;
+	font-size: medium;
 }

@@ -1,5 +1,4 @@
 <?php 
-session_start();
 
 $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connection à la bdd*/
 
@@ -9,21 +8,23 @@ if(isset($_POST['vnewmdp']))
 	$newpassword = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
 	$question = htmlspecialchars($_POST['question']);
 	$reponse = htmlspecialchars($_POST['reponse']);
-		if(!empty($_POST['username']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['reponse']))
+		if(!empty($_POST['username']) AND !empty($_POST['newpassword']) AND !empty($_POST['question']) AND !empty($_POST['reponse'])) 
 		{
 			if(preg_match('/^[a-zA-Z0-9-_]{2,36}$/', $_POST['username']))
 		   {
-			$requser = $bdd->prepare("SELECT * FROM account WHERE username = ?");
+			$requser = $bdd->prepare("SELECT username, question, reponse FROM account WHERE username = ?");
 			$requser->execute(array($username));
-			$userexist = $requser->rowCount(); 
-			if($userexist == 1 AND $question = $_SESSION['question'] AND $reponse = $_SESSION['reponse'])
-			{
-				$newpass_hash = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
-				$updatepassword = $bdd->prepare("UPDATE account SET password = ? WHERE username = ?");
-				$updatepassword->execute(array($newpass_hash, $_SESSION['username']));
-			}	
-			} else {$erreur = "merci d'utiliser les caractères alphanumériques autorisés !";} 
-		} else {$erreur = "merci de remplir tous les champs !" ;}
+			$userinfo = $requser->fetch();
+
+				if($question == $userinfo['question'] AND $reponse == $userinfo['reponse'])
+				{
+					$newpass_hash = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
+					$updatepassword = $bdd->prepare("UPDATE account SET password = ? WHERE username = ?");
+					$updatepassword->execute(array($newpass_hash, $userinfo['username']));
+					$erreur = "le mot de passe à été mis à jour ! ";
+				} else {$erreur = "La réponse à la question n'est pas correct !";}	
+			} else {$erreur = "Votre pseudo contient un caractère non valide !";} 
+		} else {$erreur = "Tous les champs doivent être remplis !";}
 }	
 
 
@@ -85,8 +86,8 @@ if(isset($_POST['vnewmdp']))
 							</tr><br />
 							<tr>
 								<td></td>
-								<td>
-									<input type="submit" name="vnewmdp" value="valider votre nouveau mot de passe" />
+								<td><br />
+									<input type="submit" name="vnewmdp" value="valider nouveau mot de passe" />
 								</td>
 							</tr>
 					</table> <br/><a href="connexion.php">Retour à la page de connexion</a> 

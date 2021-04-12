@@ -10,7 +10,7 @@ if(isset($_POST['vconnexion']))
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	if(!empty($username) AND !empty($password))
 	{
-		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
+		if(preg_match('/^[0-9a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
 			$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password, question, reponse FROM account WHERE username = :username');
 			$reqprofil->execute(array(
@@ -114,7 +114,10 @@ if(isset($_POST['vconnexion']))
 				?>
 			</div>
 		</body>
-			<footer>
-
+			<footer style="background-color:#c0c0c0"; style="padding: 20px">
+				<div align="center">
+					<p>| Mentions Légales |</p>
+					<p>| Contact |</p>
+				</div>
 			</footer>
 </html>

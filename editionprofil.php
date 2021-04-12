@@ -18,16 +18,21 @@ if(isset($_SESSION['username']))
 	$newpassword = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
 
 if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['newusername']) AND !empty($_POST['newpassword']) AND !empty($_POST['newquestion']) AND !empty($_POST['newreponse']))
-    {	
+    {
 	if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['newnom']) AND preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['newprenom']) AND preg_match('/^[a-zA-Z0-9-_]{2,36}$/', $_POST['newusername']))
 		{
-			if($newnom != $_SESSION['nom'])
+			if($newnom != $_SESSION['nom'] OR ($newprenom != $_SESSION['prenom']) OR ($newusername != $_SESSION['username'])  OR $newreponse != $_SESSION['reponse'])
 			{
-				$updateuser = $bdd->prepare("UPDATE account SET 'nom' = ?  WHERE 'username' = ?");
-				$updateuser->execute(array(
-					'nom' => $newnom, $_POST['newnom']));
-				$update = $updateuser->fetch();
+				$updateuser = $bdd->prepare("UPDATE account SET `nom` = ?, `prenom`= ?, `username` = ?, `reponse` = ? WHERE id_user = ?");
+				$updateuser->execute(array($newnom, $newprenom, $newusername, $newreponse, $profilexist['id_user']));
 				$erreur ="le profil a été mis a jour";
+
+				$newnom = $_SESSION['nom'];
+				$newprenom = $_SESSION['prenom'];
+				$newusername = $_SESSION['username'];
+				$newquestion = $_SESSION['question'];
+				$newreponse = $_SESSION['reponse'];
+				header("Location: ".$_SERVER['HTTP_REFERER']."");
 			}
 		}
 	}
@@ -67,7 +72,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 					<table>
 						<tr>
 							<td align="right">
-								<label for ="Nom">Votre nom :</label>
+								<label for ="Nom">Modifiez votre nom :</label>
 							</td>
 							<td>
 								<input type="texte" placeholder="nom" id="newnom" name="newnom" value="<?php echo $_SESSION['nom']?>" />
@@ -75,7 +80,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 						</tr><br />
 							<tr>
 								<td align="right">
-									<label for ="Prenom">Votre prenom :</label>
+									<label for ="Prenom">Modifiez votre prenom :</label>
 								</td>
 								<td>
 									<input type="texte" placeholder="prenom" id="newprenom" name="newprenom" value="<?php echo $_SESSION['prenom']?>" />
@@ -83,7 +88,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 							</tr><br />
 						<tr>
 							<td align="right">
-								<label for ="username">Votre pseudo :</label>
+								<label for ="username">Modifiez votre pseudo :</label>
 							</td>
 							<td>
 								<input type="texte" placeholder="username" id="newusername" name="newusername" value="<?php echo $_SESSION['username']?>" />
@@ -91,19 +96,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 						</tr><br />				
 							<tr>
 								<td align="right">
-								<label for="question">Question secrète :</label><br />
-								</td>
-								<td>
-									<select name="newquestion" id="newquestion" value="<?php echo $_SESSION['question']?>">
-										<option value="Quel est votre livre préféré">Quel est votre livre préféré ?</option>
-										<option value="Quel est le nom de votre animal de compagnie">Quel est le nom de votre animal de compagnie ?</option>
-										<option value="quel est le nom de jeune fille de votre mère">Quel est le nom de jeune fille de votre mere ?</option>
-									</select>
-								</td>
-						</tr><br />
-							<tr>
-								<td align="right">
-									<label for ="reponse">réponse à la question secrète :</label>
+									<label for ="reponse">Modifiez votre reponse secrète :</label>
 								</td>
 								<td>
 									<input type="texte" placeholder="reponse" id="newreponse" name="newreponse" value="<?php echo $_SESSION['reponse']?>" />
@@ -111,7 +104,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 							</tr>
 							<tr>
 							<td align="right">
-								<label for ="password">Votre mot de passe :</label>
+								<label for ="password">Validez votre mot de passe :</label>
 							</td>
 							<td>
 								<input type="password" placeholder="mot de passe" id="newpassword" name="newpassword" />
@@ -120,7 +113,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 							<tr>
 								<td></td>
 								<td><br />
-									<input type="submit" name="vmodification" value="valider les modifications" />
+									<input type="submit" name="vmodification" value="validation des modifications" />
 								</td>
 						</tr><br /><br /> 
 					</table> <br/><a href="connexion.php">Retourner à la page de connexion</a> 
@@ -134,7 +127,10 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 				?>
 			</div>
 		</body>
-			<footer>
-
+			<footer style="background-color:#c0c0c0"; style="padding: 20px">
+				<div align="center">
+					<p>| Mentions Légales |</p>
+					<p>| Contact |</p>
+				</div>
 			</footer>
 </html>

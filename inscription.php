@@ -132,7 +132,10 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 				?>
 			</div>
 		</body>
-			<footer>
-
+			<footer align="center">
+				<div>
+					<p>| Mentions Légales |</p>
+					<p>| Contact |</p>
+				</div>
 			</footer>
 </html>

@@ -15,7 +15,10 @@
 					<p> Vous êtes nouveau ? Merci de vous <a href="inscription.php">inscrire</a>.</p>
 				</div>	
 		</body>
-			<footer>
-
+			<footer style="background-color:#c0c0c0"; style="padding: 20px">
+				<div align="center">
+					<p>| Mentions Légales |</p>
+					<p>| Contact |</p>
+				</div>
 			</footer>
 </html>
