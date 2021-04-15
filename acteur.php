@@ -99,7 +99,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 					<br />
 					<div class="espace_commentaire"><?php
 						while($c = $commentaires->fetch()) { ?>
-						<b><?= $c['prenom']?> <br />le <?= $c['date_add'] . '<br /><br />' .$c['post'] ?> <br /><br /><br /></b>
+						<b><?= $c['prenom']?> <br /> le : </b> <?= $c['date_add']?>  <br /><br /><b class="comm"> "<?= $c['post'] ?>" <br /><br /><br /></b>
 					<?php } ?></div>
 				</div>
 				<footer align="center">
