@@ -1,7 +1,8 @@
 *
 {
-	margin:auto;
-	padding:auto;
+	width: 100%;
+	margin:20px;
+	padding:20px;
 	background-color: #F3EBE9 ;
 }
 
@@ -76,8 +77,28 @@ footer
 	height: 30px;
 	width: 100%;
 }
-@media(min-width: 768px) and (max-width: 1388px)
+@media all and (max-width: 1024px)
 
 {
+  * 
+  {
+  	width: auto;
+  	vertical-align: middle;
+
+  }
+  .champ_connexion
+  {
+  	width: auto;
+  	height: 20px;
+  	vertical-align: middle;
+  }
+  #main
+  {
+  	width: auto;
+  }
+  .tableau_acteur
+  {
+  	width: auto;
+  }
 
 }

@@ -4,7 +4,7 @@ session_start();
 $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 
 if(isset($_SESSION['username']))
-	$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password, question, reponse FROM account WHERE username = :username');
+	$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password, reponse FROM account WHERE username = :username');
 			$reqprofil->execute(array(
 			'username' => $_SESSION['username']));
 			$profilexist = $reqprofil->fetch();
@@ -13,11 +13,10 @@ if(isset($_SESSION['username']))
 	$newnom = htmlspecialchars($_POST['newnom']);
 	$newprenom = htmlspecialchars($_POST['newprenom']);
 	$newusername = htmlspecialchars($_POST['newusername']);
-	$newquestion = htmlspecialchars($_POST['newquestion']);
 	$newreponse = htmlspecialchars($_POST['newreponse']);
 	$newpassword = password_hash($_POST['newpassword'], PASSWORD_DEFAULT);
 
-if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['newusername']) AND !empty($_POST['newpassword']) AND !empty($_POST['newquestion']) AND !empty($_POST['newreponse']))
+if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['newusername']) AND !empty($_POST['newpassword']) AND !empty($_POST['newreponse']))
     {
 	if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['newnom']) AND preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['newprenom']) AND preg_match('/^[a-zA-Z0-9-_]{2,36}$/', $_POST['newusername']))
 		{
@@ -25,14 +24,14 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 			{
 				$updateuser = $bdd->prepare("UPDATE account SET `nom` = ?, `prenom`= ?, `username` = ?, `reponse` = ? WHERE id_user = ?");
 				$updateuser->execute(array($newnom, $newprenom, $newusername, $newreponse, $profilexist['id_user']));
-				$erreur ="le profil a été mis a jour";
+
+				header("Location: ".$_SERVER['HTTP_REFERER']."");
 
 				$newnom = $_SESSION['nom'];
 				$newprenom = $_SESSION['prenom'];
 				$newusername = $_SESSION['username'];
-				$newquestion = $_SESSION['question'];
 				$newreponse = $_SESSION['reponse'];
-				header("Location: ".$_SERVER['HTTP_REFERER']."");
+
 			}
 		}
 	}
@@ -48,7 +47,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 		<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Paramètre de votre compte </title>
 		<div >
-		<figure>
+		<figure class="entete">
 				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
 				<img src="images/contact.png" alt="image de contact" align="right" />
 		<div align ="right">

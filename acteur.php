@@ -58,7 +58,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Page Acteur</title>
 		<div >
-		<figure>
+		<figure class="entete">
 				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
 				<img src="images/contact.png" alt="image de contact" align="right" />
 		<div align ="right">
