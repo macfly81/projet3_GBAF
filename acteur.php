@@ -101,10 +101,10 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 						while($c = $commentaires->fetch()) { ?>
 						<b><?= $c['prenom']?> <br />le <?= $c['date_add'] . '<br /><br />' .$c['post'] ?> <br /><br /><br /></b>
 					<?php } ?></div>
-						<footer align="center">
-							<p>| Mentions Légales | | Contact |</p>
-						</footer>
 				</div>
+				<footer align="center">
+							| Mentions Légales | | Contact |
+						</footer>
 				</div>
 			</body>
 </html>

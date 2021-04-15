@@ -126,10 +126,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 				?>
 			</div>
 		</body>
-			<footer>
-				<div align="center">
-					<p>| Mentions Légales |</p>
-					<p>| Contact |</p>
-				</div>
+			<footer align="center">
+				| Mentions Légales | | Contact |
 			</footer>
 </html>

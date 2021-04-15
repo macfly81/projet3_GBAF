@@ -14,8 +14,8 @@
 					<p> Merci de vous <a href="connexion.php">connecter</a>.</p>
 					<p> Vous êtes nouveau ? Merci de vous <a href="inscription.php">inscrire</a>.</p>
 				</div>	
+					<footer align="center">
+						| Mentions Légales | | Contact |
+					</footer>
 		</body>
-			<footer align="center">
-				<p>| Mentions Légales | | Contact |</p>
-			</footer>
 </html>

@@ -112,7 +112,7 @@ if(isset($_POST['vconnexion']))
 				?>
 			</div>
 				<footer align="center">
-					<p>| Mentions légales | | Contact |</p>
+					| Mentions légales | | Contact |
 				</footer>
 		</body>
 </html>

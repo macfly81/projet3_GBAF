@@ -80,10 +80,10 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 						</tr>
 						 <?php endforeach ?>
 				</table>
-			</div>
 					<footer align="center">
-							<p>| Mentions Légales | | Contact |</p>
+						| Mentions Légales | | Contact |
 					</footer>
+			</div>
 			</div>
 		</body>
 </html>

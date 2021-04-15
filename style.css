@@ -1,8 +1,5 @@
 *
 {
-	width: 100%;
-	margin:20px;
-	padding:20px;
 	background-color: #F3EBE9 ;
 }
 
@@ -17,11 +14,12 @@ h2
 }
 .tableau_acteur
 {
+	display: flex;
 	width: 70%;
-	border-radius: 10px 10px 10px 10px;
-	border: 2px solid red;
-	margin-bottom: 10px;
-	padding-bottom: 70px;
+	border-radius: 5px 5px 5px 5px;
+	border: 1px solid red;
+	margin-bottom: 80px;
+
 }
 .colonne_desc
 {
@@ -41,6 +39,7 @@ h2
 	text-align: left;
 	background-color: #FBF1EF;
 	overflow: visible;
+	padding-bottom: 20px;
 }
 h1
 {
@@ -52,10 +51,12 @@ h1
 li
 {
 	font-style: italic; font-size: 20px;
+	list-style-type: none;
 }
 body, html
 {
-	height:auto;
+	width: 100%;
+	height: 100%;
 }
 #main
 {
@@ -65,40 +66,21 @@ max-width:1280px;
 min-height:100%;
 
 margin:0 auto;
-
-position:relative;
+display: flex;
+flex-direction: column;
 
 }
 footer
 {
-	position:absolute;
-	bottom:0;
-	padding-top: 10px;
-	height: 30px;
-	width: 100%;
+	color: white;
+	background-color: black;
+	margin:0;
+	padding-top: 30px;
+	height: 60px;
+	max-width: 100%;
 }
 @media all and (max-width: 1024px)
 
 {
-  * 
-  {
-  	width: auto;
-  	vertical-align: middle;
-
-  }
-  .champ_connexion
-  {
-  	width: auto;
-  	height: 20px;
-  	vertical-align: middle;
-  }
-  #main
-  {
-  	width: auto;
-  }
-  .tableau_acteur
-  {
-  	width: auto;
-  }
 
 }
