@@ -22,7 +22,7 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 			$reqacteur->execute(array($_GET['id_acteur']));
 			$acteur = $reqacteur->fetch();
 		}
-		$commentaires = $bdd->prepare("SELECT * FROM post WHERE id_acteur = ?");
+		$commentaires = $bdd->prepare("SELECT * FROM post WHERE id_acteur = ? ORDER BY post DESC");
 		$commentaires->execute(array($get_acteur));
 
 	if(isset($_GET['id_acteur']) AND isset($_SESSION['id_user']))
@@ -76,39 +76,35 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		</div>
 	</head>
 			<body>
+				<div id="main">
 				<div align="center">
 			<section >
 					<img style="max-width:300px"; src ="<?= $acteur['logo']; ?>" />
-					<p align="justify"> <?= $acteur['description']; ?> </p>
+					<p style="font-style: italic ; font-size: 20px;"align="justify"> <?= $acteur['description']; ?> </p>
 					<a href="profil.php?">Retour au profil</a>
 			</section>
 				</div>
 			<div align="center"> <br />
-				<a href="action_vote.php?t=1&id_acteur=<?= $_GET['id_acteur'] ?>"><img style="max-width:50px"; src="images/like.png" alt="like" /></a> (<?= $likes ?>)
-				<a href="action_vote.php?t=2&id_acteur=<?= $_GET['id_acteur'] ?>"><img style="max-width:50px"; src="images/dislike.png" alt="dislike" /></a> (<?= $dislikes ?>)
+				<a href="action_vote.php?t=1&id_acteur=<?= $_GET['id_acteur'] ?>"><img style="max-width:50px"; src="images/like.png" alt="like" /></a> <span class="likes"><?= $likes ?></span>
+				<a href="action_vote.php?t=2&id_acteur=<?= $_GET['id_acteur'] ?>"><img style="max-width:50px"; src="images/dislike.png" alt="dislike" /></a> <span class="likes"><?= $dislikes ?></span>
 			</div>
+				<form  method="POST">
+								<div class="commentaire" align="center">
+									<input type="submit" value="Nouveau commentaire" name="submit_commentaire" /><br/><br/>
+								   <textarea rows="13" cols="60" name="commentaire" id="commentaire" placeholder="Votre commentaire..."></textarea>
+								</div><br/>
+							</form>
+					<br /><br/>
 			<div align="center"><br />
-				<h3 align="center">
-				espace Commentaires </h3>
-				<br />
-			<?php
-				while($c = $commentaires->fetch()) { ?>
-				<b><?= $c['prenom']?> <br />le <?= $c['date_add'] . '<br /><br />' .$c['post'] ?> <br /><br /><br /></b>
-			<?php } ?>
-				
-				<div align="center">
-					<form  method="POST">
-					   <textarea name="commentaire" id="commentaire" placeholder="Votre commentaire..."></textarea><br />
-					   <input type="submit" value="Poster mon commentaire" name="submit_commentaire" />
-					</form>
-			<br />
-
+					<br />
+					<div class="espace_commentaire"><?php
+						while($c = $commentaires->fetch()) { ?>
+						<b><?= $c['prenom']?> <br />le <?= $c['date_add'] . '<br /><br />' .$c['post'] ?> <br /><br /><br /></b>
+					<?php } ?></div>
+						<footer align="center">
+							<p>| Mentions Légales | | Contact |</p>
+						</footer>
+				</div>
 				</div>
 			</body>
-			<footer style="background-color:#c0c0c0"; style="padding: 20px">
-				<div align="center">
-					<p>| Mentions Légales |</p>
-					<p>| Contact |</p>
-				</div>
-			</footer>
 </html>

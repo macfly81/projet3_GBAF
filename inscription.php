@@ -30,11 +30,7 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 					'password' => $pass_hash,
 					'question' => $question,
 					'reponse' => $reponse));
-<<<<<<< HEAD
 				$erreur = "votre compte a bien été crée ! <a href=\"connexion.php\">Me connecter</a>";
-=======
-				$erreur = "votre compte a bien été crée";
->>>>>>> main
 		} else
 			{
 			$erreur = "ce pseudonyme existe déjà";
@@ -125,13 +121,8 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 								<td>
 									<input type="submit" name="vinscription" value="valider l'inscription" />
 								</td>
-<<<<<<< HEAD
 						</tr><br /><br /> 
 					</table> <br/><a href="connexion.php">Retourner à la page de connexion</a> 
-=======
-						</tr><br />
-					</table>
->>>>>>> main
 				</form> </br>
 				<?php
 					if(isset($erreur))
@@ -141,15 +132,7 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 				?>
 			</div>
 		</body>
-<<<<<<< HEAD
 			<footer align="center">
-				<div>
-					<p>| Mentions Légales |</p>
-					<p>| Contact |</p>
-				</div>
-=======
-			<footer>
-
->>>>>>> main
+				<p>| Mentions Légales | | Contact |</p>
 			</footer>
 </html>

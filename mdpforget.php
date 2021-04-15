@@ -100,7 +100,7 @@ if(isset($_POST['vnewmdp']))
 				?>
 			</div>
 		</body>
-			<footer>
-
+			<footer align="center">
+					<p>| Mentions Légales | | Contact |</p>
 			</footer>
 </html>

@@ -46,26 +46,23 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 			
 		</div>
 	</head>
-		<header style="background-color:#c0c0c0";>
-			<h1 align="center">
-				<p style="font-style: italic ;">Le Groupement Banque Assurance Français​ (GBAF) est une fédération représentant les 6 grands groupes français :</p>
-					<ul>
-						<li>BNP Paribas</li>
-						<li>BPCE</li>
-						<li>Crédit Agricole</li>
-						<li>Crédit Mutuel-CIC</li>
-						<li>Société Générale</li>
-						<li>La Banque Postale</li>
-					</ul> 
+	<body>
+		<div id="main">
+		<h1 align="center">
+			<p style="font-style: italic ; font-size: 20px;">Le Groupement Banque Assurance Français​ (GBAF) est une fédération représentant les 6 grands groupes français :</p>
+				<ul>
+					<li>BNP Paribas</li>
+					<li>BPCE</li>
+					<li>Crédit Agricole</li>
+					<li>Crédit Mutuel-CIC</li>
+					<li>Société Générale</li>
+					<li>La Banque Postale</li>
+				</ul> 
 
-				<p style="font-style: italic ;">s’il existe une forte concurrence entre ces entités, elles vont toutes travailler de la même façon pour gérer près de 80 millions de comptes sur le territoire national.Le GBAF est le représentant de la profession bancaire et des assureurs sur tous les axes de la réglementation financière française. Sa mission est de promouvoir l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics.</p>
-			</h1>
-		</header>
-		<body>
-			
+			<p style="font-style: italic ; font-size: 20px ;">s’il existe une forte concurrence entre ces entités, elles vont toutes travailler de la même façon pour gérer près de 80 millions de comptes sur le territoire national.Le GBAF est le représentant de la profession bancaire et des assureurs sur tous les axes de la réglementation financière française. Sa mission est de promouvoir l'activité bancaire à l’échelle nationale. C’est aussi un interlocuteur privilégié des pouvoirs publics.</p>
+		</h1>
 			<div align="center">
 				<h2> Liste des Acteurs et Partenaires </h2>
-			<section class="conteneur acteurs">
 					<table border= 1 class="tableau_acteur">
 						<tr>
 							<th>Logo</th>
@@ -76,22 +73,18 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 					  	
 						foreach($acteurs as $acteur):
 					?>
-
 						<tr>
 							<td align="center"> <img style="max-width:200px"; src ="<?= $acteur['logo']; ?>" /> </td>
-							<td align="center"><p style="max-width: 20"><?= $acteur['description']; ?></p></td>
+							<td class="colonne_desc" align="center"><p style="max-width: 20"><?= $acteur['description']; ?></p></td>
 							<td align="center"> <a href="acteur.php?id_acteur=<?= $acteur['id_acteur']; ?>">lire la suite</a></td>
 						</tr>
 						 <?php endforeach ?>
 				</table>
-			</section>
+			</div>
+					<footer align="center">
+							<p>| Mentions Légales | | Contact |</p>
+					</footer>
 			</div>
 		</body>
-			<footer style="background-color:#c0c0c0"; style="padding: 20px">
-				<div align="center">
-					<p>| Mentions Légales |</p>
-					<p>| Contact |</p>
-				</div>
-			</footer>
 </html>
 

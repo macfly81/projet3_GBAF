@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 session_start();
-=======
->>>>>>> main
 
 $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)); /*connexion à la bdd*/
 
@@ -13,15 +10,9 @@ if(isset($_POST['vconnexion']))
 	$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 	if(!empty($username) AND !empty($password))
 	{
-<<<<<<< HEAD
 		if(preg_match('/^[0-9a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
 		{
 			$reqprofil = $bdd->prepare('SELECT id_user, nom, prenom, password, question, reponse FROM account WHERE username = :username');
-=======
-		if(preg_match('/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆ-]+$/', $_POST['username']))
-		{
-			$reqprofil = $bdd->prepare('SELECT id_user, password FROM account WHERE username = :username');
->>>>>>> main
 			$reqprofil->execute(array(
 				'username' => $username));
 			$profilexist = $reqprofil->fetch();
@@ -35,7 +26,6 @@ if(isset($_POST['vconnexion']))
 					$PasswordCorrect = password_verify($_POST['password'], $profilexist['password']);
 					if($PasswordCorrect)
 						{
-<<<<<<< HEAD
 							$_SESSION['id_user'] = $profilexist['id_user'];
 							$_SESSION['username'] = $username;
 							$_SESSION['nom'] = $profilexist['nom'];
@@ -49,13 +39,6 @@ if(isset($_POST['vconnexion']))
 					else 
 						{
 							$erreur = "Mauvais identifiant ou mot de passe !";
-=======
-							$erreur = "La connexion est possible !";
-						}
-					else 
-						{
-							$erreur = "Mauvais identifiant ou mot de passe 2 !";
->>>>>>> main
 						}
 					}	
 			}			
@@ -77,7 +60,6 @@ if(isset($_POST['vconnexion']))
 <!DOCTYPE html>
 <html>
 	<head>
-<<<<<<< HEAD
 		<header>
 			<link rel="stylesheet" href="style.css" type="text/css" />
 			<meta charset="utf-8"/>
@@ -86,31 +68,25 @@ if(isset($_POST['vconnexion']))
 					<img style="max-width:80px";  src="images/logo_gbaf.png" alt="logo de gbaf" />
 				</figure>
 		</header>
-=======
-		<link rel="stylesheet" href="style.css" type="text/css" />
-		<meta charset="utf-8"/>
-		<title>page d'inscription</title> 
->>>>>>> main
 	</head>
 		<body>
 			<div align="center">
 				<h2> Veuillez vous connecter :</h2>
 				<form method="POST" action="">
-					<table>
 						<tr>
-							<td align="right">
-								<label for ="Nom">Votre Pseudo :</label>
-							</td>
 							<td>
-								<input type="texte" placeholder="username" id="username" name="username" />
-							</td>
-						</tr><br />
+								<label for ="Nom">Votre Pseudo :</label>
+							</td><br/><br/>
+							<td>
+								<input class="champ_connexion" type="texte" placeholder="username" id="username" name="username" />
+							</td><br/><br/>
+						</tr>
 							<tr>
 								<td align="right">
 									<label for ="Prenom">Votre Mot De Passe :</label>
-								</td>
+								</td><br/><br/>
 								<td>
-									<input type="password" placeholder="password" id="password" name="password" />
+									<input class="champ_connexion" type="password" placeholder="password" id="password" name="password" />
 								</td>
 							</tr><br />
 						
@@ -123,15 +99,10 @@ if(isset($_POST['vconnexion']))
 						</tr><br />
 							<tr>
 								<td></td>
-<<<<<<< HEAD
 								<td><br /><a href="mdpforget.php">Mot de passe oublié ?</a>
-=======
-								<td><br /><a href="Mot de Passe oublié ?">Mot de passe oublié ?</a>
->>>>>>> main
 								</td>
 
 							</tr>
-					</table>
 				</form> </br>
 				<?php
 					if(isset($erreur))
@@ -140,16 +111,8 @@ if(isset($_POST['vconnexion']))
 					}
 				?>
 			</div>
+				<footer align="center">
+					<p>| Mentions légales | | Contact |</p>
+				</footer>
 		</body>
-<<<<<<< HEAD
-			<footer style="background-color:#c0c0c0"; style="padding: 20px">
-				<div align="center">
-					<p>| Mentions Légales |</p>
-					<p>| Contact |</p>
-				</div>
-=======
-			<footer>
-
->>>>>>> main
-			</footer>
 </html>

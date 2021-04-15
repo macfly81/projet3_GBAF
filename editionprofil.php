@@ -127,7 +127,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 				?>
 			</div>
 		</body>
-			<footer style="background-color:#c0c0c0"; style="padding: 20px">
+			<footer>
 				<div align="center">
 					<p>| Mentions Légales |</p>
 					<p>| Contact |</p>
