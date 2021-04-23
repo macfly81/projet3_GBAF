@@ -57,23 +57,26 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		<meta charset="utf-8"/>
 		<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Page Acteur</title>
-		<div >
-		<figure class="entete">
+		<header >
+			<figure>
 				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
-				<img src="images/contact.png" alt="image de contact" align="right" />
-		<div align ="right">
-				<p> Bienvenue<strong> <?php echo $_SESSION['prenom']. ' ' . $_SESSION['nom']?></strong></p>
-				<?php 
-					if(isset($_SESSION['id_user']))
-					{
-						?>
-						<a href="editionprofil.php">Changez votre mot de passe</a> <br />
-						<a href="deconnexion.php">Vous déconnecter</a>
-						<?php
-					}
-				?>
-		</figure>
-		</div>
+			</figure>
+			<div class="entete">
+					<img src="images/contact.png" alt="image de contact"/>
+					<p> Bienvenue<strong> <?php echo $_SESSION['prenom']. ' ' . $_SESSION['nom']?></strong></p>
+					<?php 
+						if(isset($_SESSION['id_user']))
+						{
+							?>
+							<a href="editionprofil.php">Changez votre mot de passe</a> <br />
+							<a href="deconnexion.php">Vous déconnecter</a>
+							<?php
+						}
+					?>
+			</div>
+
+			
+		</header>
 	</head>
 			<body>
 				<div id="main">
@@ -102,9 +105,9 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 						<b><?= $c['prenom']?> <br /> le : </b> <?= $c['date_add']?>  <br /><br /><b class="comm"> "<?= $c['post'] ?>" <br /><br /><br /></b>
 					<?php } ?></div>
 				</div>
-				<footer align="center">
-							| Mentions Légales | | Contact |
-						</footer>
+					<footer align="center">
+						| Mentions Légales | | Contact |
+					</footer>
 				</div>
 			</body>
 </html>

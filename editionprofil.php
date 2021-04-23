@@ -25,16 +25,16 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 				$updateuser = $bdd->prepare("UPDATE account SET `nom` = ?, `prenom`= ?, `username` = ?, `reponse` = ? WHERE id_user = ?");
 				$updateuser->execute(array($newnom, $newprenom, $newusername, $newreponse, $profilexist['id_user']));
 
+
+				$_SESSION['nom'] = $newnom ; 
+				$_SESSION['prenom'] = $newprenom ;
+				$_SESSION['username'] = $newusername ;
+				$_SESSION['reponse'] = $newreponse ;
 				header("Location: ".$_SERVER['HTTP_REFERER']."");
 
-				$newnom = $_SESSION['nom'];
-				$newprenom = $_SESSION['prenom'];
-				$newusername = $_SESSION['username'];
-				$newreponse = $_SESSION['reponse'];
-
 			}
-		}
-	}
+		} else { $erreur = "votre pseudonyme doit contenir entre 2 et 36 caractères et être au format alphanumérique !" ;}
+	} else { $erreur = "tous les champs doivent être remplis ! En saisissant votre mot de passe, les modifications prendront effet." ;}
 }	
 
 ?>
@@ -46,23 +46,26 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 		<meta charset="utf-8"/>
 		<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Paramètre de votre compte </title>
-		<div >
-		<figure class="entete">
+		<header >
+			<figure>
 				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
-				<img src="images/contact.png" alt="image de contact" align="right" />
-		<div align ="right">
-				<p> Bienvenue<strong> <?php echo $_SESSION['prenom'] ?></strong></p>
-				<?php 
-					if(isset($_SESSION['id_user']))
-					{
-						?>
-						<a href="deconnexion.php">Vous déconnecter</a>
-						<?php
-					}
-				?>
-		</figure>
+			</figure>
+			<div class="entete">
+					<img src="images/contact.png" alt="image de contact"/>
+					<p> Bienvenue<strong> <?php echo $_SESSION['prenom']. ' ' . $_SESSION['nom']?></strong></p>
+					<?php 
+						if(isset($_SESSION['id_user']))
+						{
+							?>
+							<a href="editionprofil.php">Changez votre mot de passe</a> <br />
+							<a href="deconnexion.php">Vous déconnecter</a>
+							<?php
+						}
+					?>
+			</div>
 
-		</div>
+			
+		</header>
 	</head>
 		<body>
 			<div align="center">
@@ -70,7 +73,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 				<form method="POST" action="">
 					<table>
 						<tr>
-							<td align="right">
+							<td >
 								<label for ="Nom">Modifiez votre nom :</label>
 							</td>
 							<td>
@@ -78,7 +81,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 							</td>
 						</tr><br />
 							<tr>
-								<td align="right">
+								<td>
 									<label for ="Prenom">Modifiez votre prenom :</label>
 								</td>
 								<td>
@@ -86,7 +89,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 								</td>
 							</tr><br />
 						<tr>
-							<td align="right">
+							<td>
 								<label for ="username">Modifiez votre pseudo :</label>
 							</td>
 							<td>
@@ -94,7 +97,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 							</td>
 						</tr><br />				
 							<tr>
-								<td align="right">
+								<td>
 									<label for ="reponse">Modifiez votre reponse secrète :</label>
 								</td>
 								<td>
@@ -102,7 +105,7 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 								</td>
 							</tr>
 							<tr>
-							<td align="right">
+							<td>
 								<label for ="password">Validez votre mot de passe :</label>
 							</td>
 							<td>
@@ -125,8 +128,8 @@ if(!empty($_POST['newnom']) AND !empty($_POST['newprenom']) AND !empty($_POST['n
 					}
 				?>
 			</div>
-		</body>
-			<footer align="center">
+						<footer align="center">
 				| Mentions Légales | | Contact |
 			</footer>
+		</body>
 </html>

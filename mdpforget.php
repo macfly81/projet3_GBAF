@@ -32,16 +32,13 @@ if(isset($_POST['vnewmdp']))
 <!DOCTYPE html>
 <html>
 	<head>
-		<head>
-		<link rel="stylesheet" href="style.css" type="text/css" />
-		<meta charset="utf-8"/>
-		<link rel="icon" href="images/favicon_gbaf.ico" />
-			<title>Mot de passe oublié ?</title> 		
-				<div >
-				<figure>
-						<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
-				</figure>
-				</div>
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<meta charset="utf-8"/>
+	<link rel="icon" href="images/favicon_gbaf.ico" />
+		<title>Mot de passe oublié ?</title> 	
+			<figure>
+					<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
+			</figure>
 	</head>
 		<body>
 			<div align="center">

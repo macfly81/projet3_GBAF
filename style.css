@@ -2,7 +2,15 @@
 {
 	background-color: #F3EBE9 ;
 }
-
+head
+{
+	background-color: #E19788 ;
+}
+header
+{
+	display: flex;
+	justify-content: space-between;
+}
 h2
 {
 	color: red;
@@ -79,13 +87,49 @@ footer
 	margin:0;
 	padding-top: 30px;
 	height: 60px;
-	max-width: 100%;
+	width: auto;
 }
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) /*responsive pour smartphones*/
+@media only screen and (max-width: 1024px) 
 {
+	header
+	{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
+	}
+	.entete
+	{
+		text-align: center; 
+	}
+	td
+	{
+		display: block;
+	}
+	.tableau_acteur 
+	{
+		border: 0;
+	}
+	.colonne_desc
+	{
+		align-content: center ;
+	}
 }
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) 
+@media only screen and (max-width: 480px) /*responsive pour smartphones*/
 {
-
+	header
+	{
+		display : flex;
+		flex-direction: column-reverse;
+		align-items: center;
+	}
+	.entete
+	{
+		text-align: center; 
+	}
+	td
+	{
+		display: block;
+	}
 }
+

@@ -26,25 +26,26 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 		<meta charset="utf-8"/>
 		<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Groupement Banque Assurance Français</title>
-		<div >
-		<figure>
+		<header >
+			<figure>
 				<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
-				<img src="images/contact.png" alt="image de contact" align="right" />
-		<div align ="right">
-				<p> Bienvenue<strong> <?php echo $_SESSION['prenom']. ' ' . $_SESSION['nom']?></strong></p>
-				<?php 
-					if(isset($_SESSION['id_user']))
-					{
-						?>
-						<a href="editionprofil.php">Changez votre mot de passe</a> <br />
-						<a href="deconnexion.php">Vous déconnecter</a>
-						<?php
-					}
-				?>
-		</figure>
+			</figure>
+			<div class="entete">
+					<img src="images/contact.png" alt="image de contact"/>
+					<p> Bienvenue<strong> <?php echo $_SESSION['prenom']. ' ' . $_SESSION['nom']?></strong></p>
+					<?php 
+						if(isset($_SESSION['id_user']))
+						{
+							?>
+							<a href="editionprofil.php">Changez votre mot de passe</a> <br />
+							<a href="deconnexion.php">Vous déconnecter</a>
+							<?php
+						}
+					?>
+			</div>
 
 			
-		</div>
+		</header>
 	</head>
 	<body>
 		<div id="main">
@@ -64,11 +65,6 @@ $bdd = new PDO('mysql:host=localhost;dbname=projet3_gbaf','root','root', array(P
 			<div align="center">
 				<h2> Liste des Acteurs et Partenaires </h2>
 					<table border= 1 class="tableau_acteur">
-						<tr>
-							<th>Logo</th>
-							<th>Description</th>
-							<th>En savoir plus</th>
-						</tr>
 					<?php 	
 					  	
 						foreach($acteurs as $acteur):
