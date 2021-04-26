@@ -53,51 +53,52 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang=fr>
 	<head>
 		<link rel="stylesheet" href="style.css" type="text/css" />
 		<meta charset="utf-8"/>
+		<meta name=viewport content="width=device-width, initial-scale=1">
 		<title>page d'inscription</title> 
 	</head>
 		<body>
-			<div align="center">
+			<div class="miseenpage">
 				<h2> Veuillez remplir les champs suivants pour l'inscription :</h2>
-				<form method="POST" action="">
+				<form method="POST">
 					<table>
 						<tr>
-							<td align="right">
-								<label for ="Nom">Votre nom :</label>
+							<td class="tdright">
+								<label for="nom">Votre nom :</label>
 							</td>
 							<td>
-								<input type="texte" placeholder="nom" id="nom" name="nom" />
+								<input type="text" placeholder="nom" id="nom" name="nom" />
 							</td>
-						</tr><br />
-							<tr>
-								<td align="right">
-									<label for ="Prenom">Votre prenom :</label>
-								</td>
-								<td>
-									<input type="texte" placeholder="prenom" id="prenom" name="prenom" />
-								</td>
-							</tr><br />
+						</tr>
 						<tr>
-							<td align="right">
+							<td class="tdright">
+								<label for="prenom">Votre prenom :</label>
+							</td>
+							<td>
+								<input type="text" placeholder="prenom" id="prenom" name="prenom" />
+							</td>
+						</tr>
+						<tr>
+							<td class="tdright">
 								<label for ="username">Votre pseudo :</label>
 							</td>
 							<td>
-								<input type="texte" placeholder="username" id="username" name="username" />
+								<input type="text" placeholder="username" id="username" name="username" />
 							</td>
-						</tr><br />
+						</tr>
 							<tr>
-							<td align="right">
+							<td class="tdright">
 								<label for ="password">Votre mot de passe :</label>
 							</td>
 							<td>
 								<input type="password" placeholder="mot de passe" id="password" name="password" />
 							</td>
-						</tr><br />
+						</tr>
 							<tr>
-								<td align="right">
+								<td class="tdright">
 								<label for="question">Question secrète :</label><br />
 								</td>
 								<td>
@@ -107,13 +108,13 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 										<option value="quel est le nom de jeune fille de votre mère">Quel est le nom de jeune fille de votre mere ?</option>
 									</select>
 								</td>
-						</tr><br />
+						</tr>
 							<tr>
-								<td align="right">
+								<td class="tdright">
 									<label for ="reponse">réponse à la question secrète :</label>
 								</td>
 								<td>
-									<input type="texte" placeholder="reponse" id="reponse" name="reponse" />
+									<input type="text" placeholder="reponse" id="reponse" name="reponse" />
 								</td>
 							</tr>
 							<tr>
@@ -121,17 +122,17 @@ if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['usernam
 								<td>
 									<input type="submit" name="vinscription" value="valider l'inscription" />
 								</td>
-						</tr><br /><br /> 
-					</table> <br/><a href="connexion.php">Retourner à la page de connexion</a> 
-				</form> </br>
+						</tr> 
+					</table><a href="index.php">Retourner à la page de connexion</a> 
+				</form> <br />
 				<?php
 					if(isset($erreur))
 					{
-						echo '<font color="red">'.$erreur."</font>";
+						echo $erreur;
 					}
 				?>
 			</div>
-				<footer align="center">
+				<footer>
 					| Mentions Légales | | Contact |
 				</footer>
 		</body>

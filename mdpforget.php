@@ -30,32 +30,35 @@ if(isset($_POST['vnewmdp']))
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<meta charset="utf-8"/>
+	<meta name=viewport content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/favicon_gbaf.ico" />
 		<title>Mot de passe oublié ?</title> 	
-			<figure>
-					<img style="max-width:80px"; src="images/logo_gbaf.png" alt="logo de gbaf" />
-			</figure>
 	</head>
 		<body>
-			<div align="center">
+			<header>
+				<figure>
+					<img style="max-width:80px" src="images/logo_gbaf.png" alt="logo de gbaf" />
+				</figure>
+			</header>
+			<div class="miseenpage">
 				<h2> Mot de passe oublié ? merci de remplir les champs suivants :</h2>
-				<form method="POST" action="">
+				<form method="POST">
 					<table>
 						<tr>
-							<td align="right">
+							<td class="tdright">
 								<label for ="username">Veuillez saisir votre pseudo :</label>
 							</td>
 							<td>
-								<input type="texte" placeholder="username" id="username" name="username" />
+								<input type="text" placeholder="username" id="username" name="username" />
 							</td>
-						</tr><br />
+						</tr>
 							<tr>
-								<td align="right">
-								<label for="question">Quelle était votre question secrète :</label><br />
+								<td class="tdright">
+								<label>Quelle était votre question secrète :</label><br />
 								</td>
 								<td>
 									<select name="question" id="question">
@@ -64,40 +67,40 @@ if(isset($_POST['vnewmdp']))
 										<option value="quel est le nom de jeune fille de votre mère">Quel est le nom de jeune fille de votre mere ?</option>
 									</select>
 								</td>
-						</tr><br />
+						</tr>
 							<tr>
-								<td align="right">
-									<label for ="reponse">Répondez à la question secrète :</label>
+								<td class="tdright">
+									<label>Répondez à la question secrète :</label>
 								</td>
 								<td>
-									<input type="texte" placeholder="reponse" id="reponse" name="reponse" />
+									<input type="text" placeholder="reponse" id="reponse" name="reponse" />
 								</td>
-							</tr><br /> 
+							</tr>
 							<tr>
-							<td align="right">
-								<label for ="password">Confirmez votre nouveau mot de passe :</label>
+							<td class="tdright">
+								<label>Confirmez votre nouveau mot de passe :</label>
 							</td>
 							<td>
 								<input type="password" placeholder="Nouveau mot de passe" id="newpassword" name="newpassword" />
 							</td>
-							</tr><br />
+							</tr>
 							<tr>
 								<td></td>
-								<td><br />
+								<td>
 									<input type="submit" name="vnewmdp" value="valider nouveau mot de passe" />
 								</td>
 							</tr>
-					</table> <br/><a href="connexion.php">Retour à la page de connexion</a> 
-				</form> </br>
+					</table> <br/><a href="index.php">Retour à la page de connexion</a> 
+				</form>
 				<?php
 					if(isset($erreur))
 					{
-						echo '<font color="red">'.$erreur."</font>";
+						echo $erreur;
 					}
 				?>
 			</div>
-		</body>
-			<footer align="center">
+				<footer>
 					| Mentions Légales | | Contact |
-			</footer>
+				</footer>
+		</body>
 </html>

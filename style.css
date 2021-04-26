@@ -11,14 +11,39 @@ header
 	display: flex;
 	justify-content: space-between;
 }
+h1
+{
+	text-align: center;
+}
+p
+{
+	font-style: italic;
+	font-size: 20px;
+	text-align: center;
+}
 h2
 {
 	color: red;
 }
+.miseenpage
+{
+	text-align: center;
+	align-content: center;
+}
+.tdright
+{
+	text-align: right;
+}
+.tdcenter
+{
+	align-items: center;
+}
 .champ_connexion
 {
-	width: 100%;
+	width: 85%;
 	height: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 .tableau_acteur
 {
@@ -27,12 +52,13 @@ h2
 	border-radius: 5px 5px 5px 5px;
 	border: 1px solid red;
 	margin-bottom: 80px;
+	border-collapse: collapse;
 
 }
 .colonne_desc
 {
  max-width: 40%;
- text-overflow: auto;
+ align-items: center;
 }
 .likes
 {
@@ -42,6 +68,10 @@ h2
 {
 	font-size: 20px;
 	font-style: italic;
+}
+.erreur
+{
+	color: red;
 }
 .espace_commentaire
 {
@@ -88,6 +118,7 @@ footer
 	padding-top: 30px;
 	height: 60px;
 	width: auto;
+	text-align: center;
 }
 @media only screen and (max-width: 1024px) 
 {
